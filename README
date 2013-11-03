@@ -1,3 +1,53 @@
 XBMCbuntu, ie lubuntu-like + XBMC
 
+# 
+
+XBMCbuntu, ie lubuntu-like + XBMC
+
 Work in progress here, not completely working yet!
+
+sudo apt-get install debootstrap asciidoc
+
+
+# Версию убунты raring, quantal, saucy меняем в /XBMCbuntu/auto/config :
+lb config noauto \
+	--mode ubuntu \
+	--distribution quantal \
+	--architecture $ARCH \
+
+# не забываем поменять для самого хбмс в /XBMCbuntu/configFiles/archives/xbmc.chroot
+Required for Intel
+libva1
+
+# для saucy отрубаем :
+ 
+xbmc-pvr-demo 
+xbmc-pvr-tvheadend-hts 
+
+В xbmc.list для AMD :
+
+deb http://ppa.launchpad.net/xbmcrus/ppa-nv/ubuntu saucy main 
+deb-src http://ppa.launchpad.net/xbmcrus/ppa-nv/ubuntu saucy main 
+
+#  Сборка : 
+
+cd XBMCbuntu
+
+sudo ./buildWithOptions.sh -a -k -X -N
+Enable option: AMD support only
+
+sudo ./buildWithOptions.sh -n -k -X -N
+Enable option: NVIDIA support only
+
+sudo ./buildWithOptions.sh -i -k -X -N
+Enable option: Intel support only
+
+# Oпции сборки :
+
+-a|--amd-only)
+-i|--intel-only)
+-n|--nvidia-only)
+-k|--keep-workarea) 
+-X|--x86_64)
+-N|--newestlivebuild) 
+ 
